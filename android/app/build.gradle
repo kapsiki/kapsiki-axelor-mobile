@@ -119,22 +119,22 @@ android {
         }
     }
     
-    flavorDimensions "type"
-    productFlavors {
-        pipeline {
-            dimension "type"
-            applicationIdSuffix ".eight.four"
-            versionNameSuffix "-demo"
-        }
-        dev {
-            dimension "type"
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-debug"
-        }
-        store {
-            dimension "type"
-        }
-    }
+//    flavorDimensions "type"
+//    productFlavors {
+//        pipeline {
+//            dimension "type"
+//            applicationIdSuffix ".eight.four"
+//            versionNameSuffix "-demo"
+//        }
+//        dev {
+//            dimension "type"
+//            applicationIdSuffix ".debug"
+//            versionNameSuffix "-debug"
+//        }
+//        store {
+//            dimension "type"
+//        }
+//    }
 }
 
 dependencies {
