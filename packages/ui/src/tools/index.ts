@@ -16,6 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export * from './setup';
-export * from './styles';
-export * from './theme';
+export {animationUtil} from './AnimationUtil';

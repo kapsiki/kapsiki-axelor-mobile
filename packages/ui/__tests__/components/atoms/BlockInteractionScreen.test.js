@@ -17,57 +17,46 @@
  */
 
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-import {shallow} from 'enzyme';
+import {View} from 'react-native';
 import {BlockInteractionScreen} from '@axelor/aos-mobile-ui';
 import * as configContext from '../../../lib/config/ConfigContext';
-import {getGlobalStyles} from '../../tools';
+import {setup} from '../../tools';
 
 describe('BlockInteractionScreen Component', () => {
-  it('renders without crashing', () => {
-    const wrapper = shallow(<BlockInteractionScreen />);
-    expect(wrapper.exists()).toBe(true);
-  });
+  const defaultHeaderHeight = 70;
 
-  it('renders children correctly', () => {
-    const children = <View testID="children" />;
-    const wrapper = shallow(
-      <BlockInteractionScreen>{children}</BlockInteractionScreen>,
-    );
+  const setupBlockInteractionScreen = overrideProps =>
+    setup({
+      Component: BlockInteractionScreen,
+      baseProps: {
+        children: <View testID="children" />,
+      },
+      overrideProps,
+    });
 
-    expect(wrapper.find('[testID="children"]').exists()).toBe(true);
-  });
-
-  it('blocks interactions', () => {
-    const onPressMock = jest.fn();
-    const children = (
-      <TouchableOpacity testID="children" onPress={onPressMock} />
-    );
-    const wrapper = shallow(
-      <BlockInteractionScreen>{children}</BlockInteractionScreen>,
-    );
-
-    wrapper.simulate('press');
-
-    expect(onPressMock).not.toHaveBeenCalled();
-  });
-
-  it('hides the header if specified', () => {
-    const mockHeaderHeight = 70;
-
+  beforeEach(() => {
     jest.spyOn(configContext, 'useConfig').mockImplementation(() => ({
-      headerHeight: mockHeaderHeight,
+      headerHeight: defaultHeaderHeight,
     }));
+  });
 
-    const children = <View testID="children" />;
-    const wrapper = shallow(<BlockInteractionScreen children={children} />);
-    const hiddenWrapper = shallow(
-      <BlockInteractionScreen children={children} hideHeader />,
-    );
+  it('renders without crashing', () => {
+    const {getByTestId} = setupBlockInteractionScreen();
 
-    expect(getGlobalStyles(wrapper.find(View).at(0)).top).toBe(
-      mockHeaderHeight,
-    );
-    expect(getGlobalStyles(hiddenWrapper.find(View).at(0)).top).toBe(0);
+    expect(getByTestId('children')).toBeTruthy();
+  });
+
+  it('applies header offset correctly when not hidden', () => {
+    const {getByTestId} = setupBlockInteractionScreen();
+
+    expect(getByTestId('blockInteractionContainer')).toHaveStyle({
+      top: defaultHeaderHeight,
+    });
+  });
+
+  it('applies no offset when header is hidden', () => {
+    const {getByTestId} = setupBlockInteractionScreen({hideHeader: true});
+
+    expect(getByTestId('blockInteractionContainer')).toHaveStyle({top: 0});
   });
 });

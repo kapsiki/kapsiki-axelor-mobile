@@ -83,6 +83,7 @@ const Increment = ({
   });
 
   const [valueQty, setValueQty] = useState<string>(value);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleDecimal = useCallback(
     (numberToFormat: string | number) => {
@@ -162,9 +163,9 @@ const Increment = ({
   };
 
   const handleEndInput = useCallback(() => {
-    const unformattedValue = defaultFormatting
-      ? valueQty.replaceAll(',', '.')
-      : valueQty;
+    setIsFocused(false);
+
+    const unformattedValue = defaultFormatting ? unformat(valueQty) : valueQty;
 
     if (unformattedValue === '' || unformattedValue == null) {
       handleResult(0);
@@ -173,20 +174,22 @@ const Increment = ({
     }
 
     onBlur?.();
-  }, [defaultFormatting, handleResult, onBlur, valueQty]);
+  }, [defaultFormatting, handleResult, onBlur, unformat, valueQty]);
 
   useEffect(() => {
-    if (clickOutside === OUTSIDE_INDICATOR) {
+    if (clickOutside === OUTSIDE_INDICATOR && isFocused) {
       handleEndInput();
     }
-  }, [clickOutside, handleEndInput]);
+  }, [clickOutside, handleEndInput, isFocused]);
 
   const handleFocus = () => {
+    setIsFocused(true);
+
     if (defaultFormatting) {
       setValueQty(current => unformat(current).replace('.', decimalSpacer));
     }
 
-    if (inputRef.current) {
+    if (inputRef.current?.setSelection) {
       inputRef.current.setSelection(0, valueQty.length);
     }
     onFocus?.();
@@ -199,7 +202,8 @@ const Increment = ({
       ref={containerRef}
       style={[styles.container_increment, style]}
       activeOpacity={0.9}
-      onPress={() => inputRef.current?.focus()}>
+      onPress={() => inputRef.current?.focus()}
+      testID="incrementContainer">
       <IncrementButton
         iconName="dash-lg"
         onPress={handleMinus}

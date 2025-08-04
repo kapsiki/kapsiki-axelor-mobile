@@ -3,6 +3,111 @@ title: 8.4.0
 tags: Changelog
 ---
 
+## [8.4.3] (2025-07-31)
+
+### @axelor/aos-mobile-core
+
+#### Fixes
+
+- Camera scanner: apply formatter which remove last character when needed like Zebra scanner
+- Camera scanner: do not reset camera key after scanning a value to avoid lost information
+
+### @axelor/aos-mobile-ui
+
+#### Fixes
+
+- AutoCompleteSearch: declench api call when user focus input
+- Increment: unformat value before processing end input to resolve outside click issue
+
+## [8.4.2] (2025-07-24)
+
+### @axelor/aos-mobile-core
+
+#### Features
+
+- Navigation: add hook to check if screen is a stack root
+
+#### Fixes
+
+- Object fields: manage deep merging to simplify fields addition in override
+- Screen context: filter undefined ids to avoid sending inconsistent results in helpers
+- Configs: reset web configurations on app refresh
+
+### @axelor/aos-mobile-ui
+
+#### Features
+
+- PeriodInput: add usePopup prop to define if date input should display as dropdown or alert
+- RadioSelect: add prop to modify question style
+
+#### Changes
+
+- Event: use popup date inputs on form view to simplify validation
+
+#### Fixes
+
+- Increment: apply outside click behavior only when input was focused
+- FloatingButton: display titles on the left
+
+### @axelor/aos-mobile-sale
+
+#### Fixes
+
+- SaleOrderLine: avoid issue when product is null
+
+### @axelor/aos-mobile-hr
+
+#### Fixes
+
+- Projects: apply the same filters as AOS
+
+### @axelor/aos-mobile-stock
+
+#### Fixes
+
+- StockMoveLine: improve sorting management with sequence field
+
+## [8.4.1] (2025-07-17)
+
+### @axelor/aos-mobile-core
+
+#### Fixes
+
+- Configs: fetch only configs required for enabled apps
+
+### @axelor/aos-mobile-ui
+
+This version contains migration of all atoms tests to RNTL.
+
+#### Features
+
+- ObjectCard: add fontSize attribute on TextElement
+
+#### Fixes
+
+- HtmlInput: add blur on click outside management
+
+### @axelor/aos-mobile-hr
+
+#### Features
+
+- Timesheet: enable deletion of a TimesheetLine linked to a TSTimer
+
+#### Fixes
+
+- Timers: remove crash issue when trying to navigate to form view
+
+### @axelor/aos-mobile-stock
+
+#### Fixes
+
+- StockMove: modify note titles to match with AOS
+- InternalMoveLine: make stock move notes readonly
+- Mass scan: add missing refresh on stock move lines completion
+- Mass scan: add permission check before displaying button
+- StockMoveLine: improve card display with smaller title & move badge to upper
+- Mass scan: make button more visible when enabled
+
 ## [8.4.0] (2025-07-03)
 
 This release brings a major update to the project's dependencies, including React Native, which is now at 0.75.x. This version also add a new test library RNTL and existing test cases will be migrated one by one during the next patch versions. The enzyme dependency should be removed in a next version.
@@ -158,4 +263,7 @@ This version add a new part of the Quality package, user can now manage quality 
 
 - ErrorBoundary: modify fallback screen management to manage maintenance error type
 
+[8.4.3]: https://github.com/axelor/axelor-mobile/compare/8.4.2...8.4.3
+[8.4.2]: https://github.com/axelor/axelor-mobile/compare/8.4.1...8.4.2
+[8.4.1]: https://github.com/axelor/axelor-mobile/compare/8.4.0...8.4.1
 [8.4.0]: https://github.com/axelor/axelor-mobile/compare/8.3.7...8.4.0
