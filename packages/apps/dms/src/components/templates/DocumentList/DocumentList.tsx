@@ -141,9 +141,9 @@ const DocumentList = ({
             return null;
           }
 
-          const isFavorite = user?.favouriteFolderSet.some(
-            ({id}) => id === branch.item.id,
-          );
+          const isFavorite =
+            user?.favouriteFolderSet &&
+            user?.favouriteFolderSet.some(({id}) => id === branch.item.id);
 
           const sliceFunction = isFavorite
             ? removeFromFavorites

@@ -65,10 +65,12 @@ const DocumentActionCard = ({
   const {user} = useSelector(state => state.user);
   const {baseUrl, token, jsessionId} = useSelector(state => state.auth);
 
-  const isFavorite = useMemo(
-    () => user?.favouriteFileSet.some(({id}) => id === document.id),
-    [document.id, user?.favouriteFileSet],
-  );
+  const isFavorite = useMemo(() => {
+    return (
+      user?.favouriteFileSet &&
+      user?.favouriteFileSet?.some(({id}) => id === document.id)
+    );
+  }, [document.id, user?.favouriteFileSet]);
 
   const handleDownloadFile = useCallback(async () => {
     await downloadFileOnPhone(

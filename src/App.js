@@ -30,6 +30,7 @@ import {ProjectModule} from '@axelor/aos-mobile-project';
 import {PurchaseModule} from '@axelor/aos-mobile-purchase';
 import {DmsModule} from '@axelor/aos-mobile-dms';
 import {MessageModule} from '@axelor/aos-mobile-message';
+import {WelcomeModule} from '@kapsiki/core';
 import application_properties from '../package.json';
 import {app_config} from './app.config';
 
@@ -37,6 +38,7 @@ const App = () => {
   return (
     <Application
       modules={[
+        WelcomeModule,
         StockModule,
         ManufacturingModule,
         CrmModule,
@@ -50,7 +52,7 @@ const App = () => {
         PurchaseModule,
         MessageModule,
       ]}
-      mainMenu="auth_menu_user"
+      mainMenu="welcome_menu"
       version={application_properties.version}
       configuration={app_config}
     />

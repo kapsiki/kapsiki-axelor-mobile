@@ -169,7 +169,7 @@ const Navigator = ({mainMenu, onRefresh, versionCheckConfig}) => {
             const renderTitle = () => (
               <Header
                 mainScreen={initialRouteName === key}
-                title={title}
+                title={I18n.t(title)}
                 actionID={actionID}
                 shadedHeader={options?.shadedHeader}
               />
@@ -197,7 +197,7 @@ const Navigator = ({mainMenu, onRefresh, versionCheckConfig}) => {
         )}
       </Stack.Navigator>
     ),
-    [modulesScreens],
+    [modulesScreens, I18n],
   );
 
   const renderDrawer = useCallback(
