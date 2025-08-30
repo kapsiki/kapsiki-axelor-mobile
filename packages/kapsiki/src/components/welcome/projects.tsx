@@ -3,15 +3,14 @@
 import React, {useCallback} from 'react';
 import {
   NavigationObject,
-  storage,
   useNavigation,
   useSelector,
   useTranslator,
 } from '@axelor/aos-mobile-core';
-import {FunctionComponent, useEffect, useMemo, useState} from 'react';
-import {FlatList, Modal, Text, TouchableOpacity, View} from 'react-native';
+import {FunctionComponent, useEffect, useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {searchProjectApi} from '@axelor/aos-mobile-project';
-import {Icon, useThemeColor} from '@axelor/aos-mobile-ui';
+import {useThemeColor} from '@axelor/aos-mobile-ui';
 
 export type ProjectsProps = {};
 

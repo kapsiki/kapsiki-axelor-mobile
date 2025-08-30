@@ -5,8 +5,7 @@ import {SearchInput} from '../components/welcome/search-input';
 import {ScrollView} from 'react-native';
 import {QuickLinks} from '../components/welcome/quick-links';
 import {Projects} from '../components/welcome/projects';
-import TabBarNavigator from '../components/tab-navigator';
-const WelcomeScreen = () => {
+const WelcomeView = () => {
   return (
     <Screen style={{flex: 1}} removeSpaceOnTop={true}>
       <ScrollView
@@ -20,19 +19,5 @@ const WelcomeScreen = () => {
     </Screen>
   );
 };
-const screens = [
-  {
-    title: 'Home',
-    component: WelcomeScreen,
-    headerStyle: {backgroundColor: '#fff'},
-  },
-  // ... more screens
-];
 
-export default () => (
-  <TabBarNavigator
-    screens={screens}
-    initialTab={0}
-    swipeThreshold={100} // Customize swipe sensitivity
-  />
-);
+export default WelcomeView;
