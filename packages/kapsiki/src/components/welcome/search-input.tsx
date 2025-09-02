@@ -355,16 +355,20 @@ export const SearchInput: FunctionComponent<SearchInputProps> = () => {
     (async () => {})();
   }, []);
 
+  const [showSearchModal, setShowSearchModal] = useState(false);
+
   return (
     <View
       style={{
         width: '100%',
         padding: 20,
+        paddingTop: 0,
         gap: 20,
         // position: 'relative',
         // zIndex: 1,
       }}>
-      <View
+      <TouchableOpacity
+        onPress={() => setShowSearchModal(true)}
         style={{
           width: '100%',
           flexDirection: 'row',
@@ -383,226 +387,306 @@ export const SearchInput: FunctionComponent<SearchInputProps> = () => {
           }}>
           <Icon name="search" size={20} color={Colors.placeholderTextColor} />
         </View>
-        <TextInput
-          placeholder={I18n.t('search')}
-          autoCorrect={false}
-          autoCapitalize="none"
-          returnKeyType="search"
-          onFocus={() => {
-            setShowResults(true);
-          }}
+        <Text
           style={{
             backgroundColor: Colors.backgroundColor,
-            color: Colors.text,
-            height: 56,
+            color: Colors.placeholderTextColor,
             flex: 1,
-            paddingVertical: 12,
             paddingHorizontal: 20,
-            // paddingRight: 10,
             fontSize: 16,
-          }}
-          value={text}
-          onChangeText={handleSearchTextChange}
-          placeholderTextColor={Colors.placeholderTextColor}
-        />
-
-        <TouchableOpacity
-          onPress={() => setShowFilterModal(true)}
-          style={{
-            backgroundColor: hasActiveFilters()
-              ? Colors.primaryColor + '20'
-              : Colors.placeholderTextColor + '20',
-            height: 56,
-            width: 56,
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
           }}>
-          <Icon
-            name="filter"
-            size={20}
-            color={
-              hasActiveFilters()
-                ? Colors.primaryColor.background
-                : Colors.placeholderTextColor
-            }
-          />
-          {hasActiveFilters() && (
+          {I18n.t('search')}
+        </Text>
+      </TouchableOpacity>
+
+      <Modal
+        visible={showSearchModal}
+        transparent={false}
+        animationType="slide"
+        style={{
+          margin: 0,
+          flex: 1,
+          backgroundColor: Colors.screenBackgroundColor,
+        }}
+        onRequestClose={() => setShowSearchModal(false)}>
+        <View
+          style={{
+            margin: 0,
+            flex: 1,
+            backgroundColor: Colors.screenBackgroundColor,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 20,
+              padding: 20,
+            }}>
+            <Icon
+              name="arrow-left"
+              size={26}
+              color={Colors.primaryColor.background}
+              touchable
+              onPress={() => setShowSearchModal(false)}
+            />
             <View
               style={{
-                position: 'absolute',
-                top: 8,
-                right: 8,
-                backgroundColor: Colors.primaryColor.background,
-                borderRadius: 8,
-                minWidth: 16,
-                height: 16,
+                flex: 1,
+                flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'center',
+                backgroundColor: Colors.backgroundColor,
+                borderRadius: 12,
+                overflow: 'hidden',
               }}>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 10,
-                  fontWeight: 'bold',
-                }}>
-                {getActiveFiltersCount()}
-              </Text>
-            </View>
-          )}
-        </TouchableOpacity>
-
-        {text.length > 0 && (
-          <TouchableOpacity
-            onPress={handleClearSearch}
-            disabled={isLoading}
-            style={{
-              backgroundColor: Colors.placeholderTextColor + '20',
-              height: 56,
-              width: 56,
-              alignItems: 'center',
-              justifyContent: 'center',
-              opacity: isLoading ? 0.7 : 1,
-            }}>
-            {isLoading ? (
-              <ActivityIndicator
-                size="small"
-                color={Colors.placeholderTextColor}
-              />
-            ) : (
-              <Icon name="x" size={20} color={Colors.placeholderTextColor} />
-            )}
-          </TouchableOpacity>
-        )}
-      </View>
-      {responses && Object.keys(responses).length > 0 && showResults && (
-        <ScrollView
-          style={{
-            width: '100%',
-            // margin: 20,
-            padding: 20,
-            // position: 'absolute',
-            backgroundColor: Colors.backgroundColor,
-            borderRadius: 12,
-            // top: '100%',
-            // marginTop: 40,
-            // height: 200,
-          }}>
-          {Object.entries(responses)
-            .filter(([_key, value]) => value && value.length > 0)
-            .map(([key, value]) => (
               <View
                 style={{
-                  width: '100%',
+                  paddingLeft: 20,
+                  backgroundColor: Colors.backgroundColor,
+                  height: 56,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Icon
+                  name="search"
+                  size={20}
+                  color={Colors.placeholderTextColor}
+                />
+              </View>
+              <TextInput
+                placeholder={I18n.t('search')}
+                autoCorrect={false}
+                autoCapitalize="none"
+                returnKeyType="search"
+                onFocus={() => {
+                  setShowResults(true);
                 }}
-                key={key}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    marginBottom: 4,
-                    fontSize: 16,
-                  }}>
-                  {I18n.t(`search_${key}`)}
-                </Text>
-                <FlatList
-                  data={value
-                    .filter(item =>
-                      key === 'documents' ? !item.isDirectory : true,
-                    )
-                    .slice(0, 3)}
-                  style={{}}
-                  contentContainerStyle={{gap: 12}}
-                  renderItem={({item}) => (
-                    <TouchableOpacity
-                      onPress={async () => {
-                        enum KeysRoutes {
-                          leads = 'LeadDetailsScreen',
-                          projects = 'ProjectDetailsScreen',
-                          contacts = 'ContactDetailsScreen',
-                          clients = 'ClientDetailsScreen',
-                          prospects = 'ProspectDetailsScreen',
-                        }
-                        if (key === 'documents' && !item.isDirectory) {
-                          setIsLoading(true);
-                          await handleDownloadFile(item);
-                          handleClearSearch();
-                          setIsLoading(false);
-                          return;
-                        }
-                        navigation.navigate(KeysRoutes[key], {
-                          idLead: item.id,
-                          projectId: item.id,
-                          idContact: item.id,
-                          idClient: item.id,
-                          idProspect: item.id,
-                        });
+                style={{
+                  backgroundColor: Colors.backgroundColor,
+                  color: Colors.text,
+                  height: 56,
+                  flex: 1,
+                  paddingVertical: 12,
+                  paddingHorizontal: 20,
+                  // paddingRight: 10,
+                  fontSize: 16,
+                }}
+                value={text}
+                onChangeText={handleSearchTextChange}
+                placeholderTextColor={Colors.placeholderTextColor}
+              />
 
-                        // console.log(item);
-                        // setShowResults(false);
-                        // setResponses(undefined);
-                        // setText('');
-                      }}
+              <TouchableOpacity
+                onPress={() => setShowFilterModal(true)}
+                style={{
+                  backgroundColor: hasActiveFilters()
+                    ? Colors.primaryColor + '20'
+                    : Colors.placeholderTextColor + '20',
+                  height: 56,
+                  width: 56,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                }}>
+                <Icon
+                  name="filter"
+                  size={20}
+                  color={
+                    hasActiveFilters()
+                      ? Colors.primaryColor.background
+                      : Colors.placeholderTextColor
+                  }
+                />
+                {hasActiveFilters() && (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      top: 8,
+                      right: 8,
+                      backgroundColor: Colors.primaryColor.background,
+                      borderRadius: 8,
+                      minWidth: 16,
+                      height: 16,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
                       style={{
-                        padding: 8,
-                        paddingHorizontal: 12,
-                        borderRadius: 12,
+                        color: 'white',
+                        fontSize: 10,
+                        fontWeight: 'bold',
                       }}>
+                      {getActiveFiltersCount()}
+                    </Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+
+              {text.length > 0 && (
+                <TouchableOpacity
+                  onPress={handleClearSearch}
+                  disabled={isLoading}
+                  style={{
+                    backgroundColor: Colors.placeholderTextColor + '20',
+                    height: 56,
+                    width: 56,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: isLoading ? 0.7 : 1,
+                  }}>
+                  {isLoading ? (
+                    <ActivityIndicator
+                      size="small"
+                      color={Colors.placeholderTextColor}
+                    />
+                  ) : (
+                    <Icon
+                      name="x"
+                      size={20}
+                      color={Colors.placeholderTextColor}
+                    />
+                  )}
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+          <ScrollView
+            style={{
+              flex: 1,
+              padding: 20,
+            }}>
+            {responses && Object.keys(responses).length > 0 && showResults && (
+              <ScrollView
+                style={{
+                  width: '100%',
+                  // margin: 20,
+                  padding: 20,
+                  // position: 'absolute',
+                  backgroundColor: Colors.backgroundColor,
+                  borderRadius: 12,
+                  // top: '100%',
+                  // marginTop: 40,
+                  // height: 200,
+                }}>
+                {Object.entries(responses)
+                  .filter(([_key, value]) => value && value.length > 0)
+                  .map(([key, value]) => (
+                    <View
+                      style={{
+                        width: '100%',
+                      }}
+                      key={key}>
                       <Text
                         style={{
                           fontWeight: 'bold',
                           marginBottom: 4,
                           fontSize: 16,
                         }}>
-                        {item.simpleFullName || item.name || item.fileName}
+                        {I18n.t(`search_${key}`)}
                       </Text>
-                      {item.description ? (
-                        <Text style={{fontSize: 14}}>{item.description}</Text>
-                      ) : key === 'projects' ? (
-                        <Text style={{fontSize: 14}}>
-                          {I18n.t('no_description')}
-                        </Text>
-                      ) : null}
-                      {item.isDirectory ? (
-                        <Text style={{fontSize: 14}}>{I18n.t('folder')}</Text>
-                      ) : key === 'documents' ? (
-                        <Text style={{fontSize: 14}}>
-                          {I18n.t('no_folder')}
-                        </Text>
-                      ) : null}
-                      {item.enterpriseName ? (
-                        <Text style={{fontSize: 14}}>
-                          {item.enterpriseName}
-                        </Text>
-                      ) : key === 'leads' ? (
-                        <Text style={{fontSize: 14}}>
-                          {I18n.t('no_enterprise')}
-                        </Text>
-                      ) : null}
-                      {item.mainPartner && item.mainPartner.fullName ? (
-                        <Text style={{fontSize: 14}}>
-                          {item.mainPartner.fullName}
-                        </Text>
-                      ) : key === 'contacts' ? (
-                        <Text style={{fontSize: 14}}>
-                          {I18n.t('no_partner')}
-                        </Text>
-                      ) : null}
-                      {item['mainAddress.fullName'] ? (
-                        <Text style={{fontSize: 14}}>
-                          {item['mainAddress.fullName']}
-                        </Text>
-                      ) : key === 'clients' ? (
-                        <Text style={{fontSize: 14}}>
-                          {I18n.t('no_address')}
-                        </Text>
-                      ) : null}
-                    </TouchableOpacity>
-                  )}
-                />
-              </View>
-            ))}
-        </ScrollView>
-      )}
+                      <FlatList
+                        data={value
+                          .filter(item =>
+                            key === 'documents' ? !item.isDirectory : true,
+                          )
+                          .slice(0, 3)}
+                        style={{}}
+                        contentContainerStyle={{gap: 12}}
+                        renderItem={({item}) => (
+                          <TouchableOpacity
+                            onPress={async () => {
+                              enum KeysRoutes {
+                                leads = 'LeadDetailsScreen',
+                                projects = 'ProjectDetailsScreen',
+                                contacts = 'ContactDetailsScreen',
+                                clients = 'ClientDetailsScreen',
+                                prospects = 'ProspectDetailsScreen',
+                              }
+                              if (key === 'documents' && !item.isDirectory) {
+                                setIsLoading(true);
+                                await handleDownloadFile(item);
+                                handleClearSearch();
+                                setIsLoading(false);
+                                return;
+                              }
+                              navigation.navigate(KeysRoutes[key], {
+                                idLead: item.id,
+                                projectId: item.id,
+                                idContact: item.id,
+                                idClient: item.id,
+                                idProspect: item.id,
+                              });
+                            }}
+                            style={{
+                              padding: 8,
+                              paddingHorizontal: 12,
+                              borderRadius: 12,
+                            }}>
+                            <Text
+                              style={{
+                                fontWeight: 'bold',
+                                marginBottom: 4,
+                                fontSize: 16,
+                              }}>
+                              {item.simpleFullName ||
+                                item.name ||
+                                item.fileName}
+                            </Text>
+                            {item.description ? (
+                              <Text style={{fontSize: 14}}>
+                                {item.description}
+                              </Text>
+                            ) : key === 'projects' ? (
+                              <Text style={{fontSize: 14}}>
+                                {I18n.t('no_description')}
+                              </Text>
+                            ) : null}
+                            {item.isDirectory ? (
+                              <Text style={{fontSize: 14}}>
+                                {I18n.t('folder')}
+                              </Text>
+                            ) : key === 'documents' ? (
+                              <Text style={{fontSize: 14}}>
+                                {I18n.t('no_folder')}
+                              </Text>
+                            ) : null}
+                            {item.enterpriseName ? (
+                              <Text style={{fontSize: 14}}>
+                                {item.enterpriseName}
+                              </Text>
+                            ) : key === 'leads' ? (
+                              <Text style={{fontSize: 14}}>
+                                {I18n.t('no_enterprise')}
+                              </Text>
+                            ) : null}
+                            {item.mainPartner && item.mainPartner.fullName ? (
+                              <Text style={{fontSize: 14}}>
+                                {item.mainPartner.fullName}
+                              </Text>
+                            ) : key === 'contacts' ? (
+                              <Text style={{fontSize: 14}}>
+                                {I18n.t('no_partner')}
+                              </Text>
+                            ) : null}
+                            {item['mainAddress.fullName'] ? (
+                              <Text style={{fontSize: 14}}>
+                                {item['mainAddress.fullName']}
+                              </Text>
+                            ) : key === 'clients' ? (
+                              <Text style={{fontSize: 14}}>
+                                {I18n.t('no_address')}
+                              </Text>
+                            ) : null}
+                          </TouchableOpacity>
+                        )}
+                      />
+                    </View>
+                  ))}
+                <View style={{height: 40}} />
+              </ScrollView>
+            )}
+          </ScrollView>
+        </View>
+      </Modal>
 
       {/* Filter Modal */}
       <Modal

@@ -17,7 +17,15 @@
  */
 
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {Dimensions, Platform, StyleSheet, View} from 'react-native';
+import {
+  Dimensions,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {Text, useConfig, useThemeColor} from '@axelor/aos-mobile-ui';
 import {useTranslator} from '../../../i18n';
 import {
@@ -38,6 +46,8 @@ interface HeaderProps {
   title: string;
   actionID?: string;
   shadedHeader?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
+  textTitleStyle?: StyleProp<TextStyle>;
 }
 
 const Header = ({
@@ -45,6 +55,8 @@ const Header = ({
   title,
   actionID,
   shadedHeader = true,
+  containerStyle,
+  textTitleStyle,
 }: HeaderProps) => {
   const Colors = useThemeColor();
   const I18n = useTranslator();
@@ -93,11 +105,11 @@ const Header = ({
         setContainerHeight(height);
       }}
       style={[styles.header, shadedHeader ? styles.shadedHeader : null]}>
-      <View style={styles.options}>
+      <View style={[styles.options, containerStyle]}>
         <HeaderButton isRoot={mainScreen} />
         <View style={styles.titleContainer}>
           <Text
-            style={styles.headerTitle}
+            style={[styles.headerTitle, textTitleStyle]}
             fontSize={20}
             numberOfLines={1}
             adjustsFontSizeToFit={

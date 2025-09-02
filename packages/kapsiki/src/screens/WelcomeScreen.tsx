@@ -6,6 +6,7 @@ import {ScrollView, StatusBar, StyleSheet, View} from 'react-native';
 import {QuickLinks} from '../components/welcome/quick-links';
 import {Projects} from '../components/welcome/projects';
 import TabBarNavigator from '../components/tab-navigator';
+import {Header} from '../components/header';
 const WelcomeScreen = () => {
   return (
     <Screen style={{flex: 1}} removeSpaceOnTop={true}>
@@ -13,6 +14,7 @@ const WelcomeScreen = () => {
         scrollEnabled
         nestedScrollEnabled={true} // Enable nested scrolling
         showsVerticalScrollIndicator={true}>
+        <Header title="Welcome" />
         <SearchInput />
         <QuickLinks />
         <Projects />

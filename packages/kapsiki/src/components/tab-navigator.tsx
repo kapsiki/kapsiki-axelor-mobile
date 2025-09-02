@@ -19,7 +19,6 @@ type Screen = {
   title: string;
   component: React.ComponentType<ScreenComponentProps>;
   icon?: (isActive: boolean) => ReactNode;
-  header?: () => ReactNode;
   headerStyle?: ViewStyle;
 };
 
@@ -43,7 +42,6 @@ export const TabBarNavigator: React.FC<TabBarNavigatorProps> = ({
   activeTabStyle = {},
   tabTextStyle = {},
   activeTabTextStyle = {},
-  headerStyle = {},
   containerStyle = {},
 }) => {
   const [activeTab, setActiveTab] = useState(initialTab);
@@ -91,32 +89,9 @@ export const TabBarNavigator: React.FC<TabBarNavigatorProps> = ({
     </View>
   );
 
-  const renderHeader = () => {
-    const currentScreen = screens[activeTab];
-    if (!currentScreen?.header) return null;
-
-    const defaultHeaderStyle: ViewStyle = {
-      backgroundColor: '#fff',
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      borderBottomWidth: 1,
-      borderBottomColor: '#e0e0e0',
-      ...headerStyle,
-    };
-
-    return (
-      <View style={[defaultHeaderStyle, currentScreen.headerStyle]}>
-        {typeof currentScreen.header === 'function'
-          ? currentScreen.header()
-          : currentScreen.header}
-      </View>
-    );
-  };
-
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      {renderHeader()}
       <CurrenScreen isActive tabIndex={activeTab} />
       {renderTabBar()}
     </SafeAreaView>

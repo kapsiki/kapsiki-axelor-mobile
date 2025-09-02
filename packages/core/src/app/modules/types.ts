@@ -21,6 +21,7 @@ import {Reducer} from '@reduxjs/toolkit';
 import {Schema} from 'yup';
 import {FormConfigs} from '../../forms/types';
 import {ModuleSelections} from '../../selections';
+import {StyleProp, TextStyle, ViewStyle} from 'react-native';
 
 interface MinimumMenuFields {
   title: string;
@@ -59,6 +60,9 @@ export type Menu = MenuWithSubMenus | RootMenuWithScreen | MenuSeparator;
 
 interface ScreenOptions {
   shadedHeader: boolean;
+  headerShown?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
+  textTitleStyle?: StyleProp<TextStyle>;
 }
 
 export interface Screen {
