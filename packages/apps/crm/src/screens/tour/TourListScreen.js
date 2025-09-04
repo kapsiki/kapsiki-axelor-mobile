@@ -87,6 +87,7 @@ const TourListScreen = ({navigation}) => {
       <ScrollList
         loadingList={loadingTourList}
         data={tourList}
+        style={{flex: 1}}
         renderItem={({item}) => (
           <TourCard
             tour={item}

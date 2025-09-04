@@ -69,8 +69,11 @@ const ContactPartnerCard = ({}) => {
 
 const styles = StyleSheet.create({
   item: {
-    marginHorizontal: 20,
-    marginVertical: 7,
+    marginHorizontal: 0,
+    marginVertical: 0,
+    borderRadius: 0,
+    marginBottom: 5,
+    paddingHorizontal: 20,
   },
 });
 

@@ -18,7 +18,7 @@
 
 import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
-import {StarScore, ObjectCard} from '@axelor/aos-mobile-ui';
+import {StarScore, ObjectCard, useThemeColor} from '@axelor/aos-mobile-ui';
 import {
   useSelector,
   useMetafileUri,
@@ -57,7 +57,7 @@ const PartnerCard = ({
 }: PartnerCardProps) => {
   const formatMetaFile = useMetafileUri();
   const {getItemColorFromIndex} = useTypeHelpers();
-
+  const Colors = useThemeColor();
   const {crm: crmConfig} = useSelector((state: any) => state.appConfig);
 
   const borderStyle = useMemo(
@@ -81,6 +81,13 @@ const PartnerCard = ({
       style={[
         crmConfig?.crmProcessOnPartner && partnerStatus ? borderStyle : null,
         style,
+        {
+          borderBottomColor: Colors.plannedColor.background,
+          borderBottomWidth: 1,
+          // height: 100,
+          paddingVertical: 20,
+          justifyContent: 'center',
+        },
       ]}
       upperTexts={{
         items: [

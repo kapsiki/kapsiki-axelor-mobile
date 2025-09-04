@@ -17,15 +17,12 @@
  */
 
 import React, {useEffect, useMemo} from 'react';
-import {StyleSheet, View} from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated';
+import {StyleSheet, Touchable, TouchableOpacity, View} from 'react-native';
+import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
 import {Color, useThemeColor} from '../../../theme';
-import {Button, NumberBubble} from '../../molecules';
+import {NumberBubble} from '../../molecules';
 import ItemTitle from './ItemTitle';
+import {Icon} from '../../atoms';
 
 const BarItem = ({
   iconName,
@@ -47,18 +44,11 @@ const BarItem = ({
   onPress: () => void;
 }) => {
   const Colors = useThemeColor();
-
   const scale = useSharedValue(0.8);
 
   useEffect(() => {
     scale.value = withSpring(isSelected ? 1 : 0.8);
   }, [isSelected, scale]);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{scale: scale.value}],
-    };
-  });
 
   const buttonColor: Color = useMemo(
     () => color ?? Colors.primaryColor,
@@ -66,20 +56,25 @@ const BarItem = ({
   );
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={animatedStyle}>
-        <Button
+    <TouchableOpacity onPress={!disabled && onPress} style={styles.container}>
+      <View>
+        {/* <Button
           iconName={iconName}
-          color={buttonColor}
+          // color={}
           disabled={disabled}
           onPress={onPress}
           width={size}
-          style={{height: size}}
+          style={{height: }}
           iconSize={size * 0.6}
+        /> */}
+        <Icon
+          name={iconName}
+          color={isSelected ? Colors.text : Colors.placeholderTextColor}
+          size={size * 0.4}
         />
-      </Animated.View>
+      </View>
       {indicator > 0 && (
-        <Animated.View style={[animatedStyle, styles.indicator]}>
+        <Animated.View style={[styles.indicator]}>
           <NumberBubble
             number={indicator}
             color={buttonColor}
@@ -87,8 +82,11 @@ const BarItem = ({
           />
         </Animated.View>
       )}
-      <ItemTitle title={title} style={{width: size}} />
-    </View>
+      <ItemTitle
+        title={title}
+        style={{color: isSelected ? Colors.text : Colors.placeholderTextColor}}
+      />
+    </TouchableOpacity>
   );
 };
 
@@ -97,6 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginHorizontal: 2,
+    gap: 2,
     marginBottom: 6,
   },
   indicator: {

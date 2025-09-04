@@ -19,7 +19,7 @@
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {DateDisplay, useTranslator} from '@axelor/aos-mobile-core';
-import {Icon, Text} from '@axelor/aos-mobile-ui';
+import {Icon, Text, useThemeColor} from '@axelor/aos-mobile-ui';
 
 interface DateItemProps {
   title: string;
@@ -34,6 +34,7 @@ const DatesDisplay = ({
   toDate?: string;
 }) => {
   const I18n = useTranslator();
+  const Colors = useThemeColor();
 
   const renderDateItem = useCallback(
     ({title, value}: DateItemProps) => {
@@ -42,7 +43,7 @@ const DatesDisplay = ({
       }
 
       return (
-        <View style={styles.dateWrapper}>
+        <View style={[styles.dateWrapper]}>
           <Text style={styles.centerText}>{I18n.t(title)}</Text>
           <DateDisplay date={value} />
         </View>
@@ -52,7 +53,14 @@ const DatesDisplay = ({
   );
 
   return (
-    <View style={styles.dateContainer}>
+    <View
+      style={[
+        styles.dateContainer,
+        {
+          borderBottomColor: Colors.plannedColor.background,
+          borderBottomWidth: 1,
+        },
+      ]}>
       {renderDateItem({title: 'Project_StartedOn', value: fromDate})}
       <Icon
         name="arrow-right"
@@ -70,7 +78,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 5,
+    padding: 10,
+    borderRadius: 0,
   },
   icon: {
     marginHorizontal: 2,

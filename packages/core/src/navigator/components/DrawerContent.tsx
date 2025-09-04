@@ -254,7 +254,7 @@ const getStyles = (Colors: ThemeColors) =>
     container: {
       flex: 1,
       flexDirection: 'row',
-      backgroundColor: Colors.screenBackgroundColor,
+      backgroundColor: Colors.backgroundColor,
       overflow: 'hidden',
       zIndex: 2,
     },
