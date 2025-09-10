@@ -107,7 +107,7 @@ const Screen = ({
 const getStyles = (Colors: ThemeColors) =>
   StyleSheet.create({
     container: {
-      backgroundColor: Colors.screenBackgroundColor,
+      backgroundColor: Colors.backgroundColor,
       flex: 1,
     },
     childrenContainer: {

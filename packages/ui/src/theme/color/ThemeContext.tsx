@@ -24,7 +24,7 @@ import React, {
   useMemo,
   useReducer,
 } from 'react';
-import {lightTheme, purpleTheme, colorBlindTheme} from './themes';
+import {lightTheme, purpleTheme, colorBlindTheme, kapsikiTheme} from './themes';
 import {ConfigurableTheme, Theme, ThemeColors} from './types';
 import {getActiveTheme, registerThemes} from './content.helpers';
 
@@ -32,7 +32,7 @@ function throwError(action: string) {
   throw new Error(`Theme provider should be mounted to ${action}`);
 }
 
-const DEFAULT_THEME = purpleTheme;
+const DEFAULT_THEME = kapsikiTheme;
 const COLORBLIND_THEME = colorBlindTheme;
 
 interface ThemeContextState {
@@ -53,7 +53,7 @@ interface ThemeAction {
 const defaultThemeContext = {
   activeTheme: DEFAULT_THEME,
   isColorBlind: DEFAULT_THEME === COLORBLIND_THEME,
-  themes: [lightTheme, purpleTheme],
+  themes: [kapsikiTheme, lightTheme, purpleTheme],
   changeTheme: () => throwError('change theme'),
   addThemes: () => throwError('add themes'),
   activateColorBlind: () => throwError('activate color blind'),

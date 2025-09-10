@@ -18,7 +18,13 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Card, LabelText, Text, ProgressBar} from '@axelor/aos-mobile-ui';
+import {
+  Card,
+  LabelText,
+  Text,
+  ProgressBar,
+  useThemeColor,
+} from '@axelor/aos-mobile-ui';
 import {useTranslator, DateDisplay} from '@axelor/aos-mobile-core';
 import {searchTourLineApi} from '../../../api';
 
@@ -30,7 +36,7 @@ interface TourCardProps {
 
 const TourCard = ({style, onPress, tour}: TourCardProps) => {
   const I18n = useTranslator();
-
+  const Colors = useThemeColor();
   const isMounted = useRef(true);
 
   const [numberTourLineValidated, setNumberTourLineValidated] =
@@ -70,7 +76,22 @@ const TourCard = ({style, onPress, tour}: TourCardProps) => {
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      <Card style={[styles.container, style]}>
+      <Card
+        style={[
+          styles.container,
+          style,
+          {
+            borderBottomColor: Colors.plannedColor.background,
+            borderBottomWidth: 1,
+            // height: 100,
+            paddingVertical: 20,
+            paddingHorizontal: 20,
+            justifyContent: 'center',
+            marginHorizontal: 0,
+            marginVertical: 0,
+            borderRadius: 0,
+          },
+        ]}>
         <View style={styles.childrenContainer}>
           <Text writingType="title">{tour.name}</Text>
           <DateDisplay date={tour.date} />

@@ -63,11 +63,10 @@ const GeneralInformationView = () => {
 const styles = StyleSheet.create({
   scrollView: {
     height: null,
+    paddingTop: 0,
+    paddingHorizontal: 0,
   },
-  margin: {
-    width: '90%',
-    alignSelf: 'center',
-  },
+  margin: {},
 });
 
 export default GeneralInformationView;

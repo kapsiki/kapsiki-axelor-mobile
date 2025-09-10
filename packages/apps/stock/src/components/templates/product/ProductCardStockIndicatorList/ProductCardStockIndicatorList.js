@@ -18,7 +18,11 @@
 
 import React, {useCallback, useMemo} from 'react';
 import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {IndicatorChart, useDigitFormat} from '@axelor/aos-mobile-ui';
+import {
+  IndicatorChart,
+  useDigitFormat,
+  useThemeColor,
+} from '@axelor/aos-mobile-ui';
 import {
   useTranslator,
   useSelector,
@@ -92,18 +96,25 @@ const ProductCardStockIndicatorList = ({
     productIndicators,
     supplychainConfig?.manageStockReservation,
   ]);
-
+  const Colors = useThemeColor();
   const renderIndicator = useCallback(
     ({titleKey, value, condition = true, onPress}, idx) => {
       if (value != null && condition) {
         return (
           <TouchableOpacity
-            style={styles.chartContainer}
+            style={[
+              styles.chartContainer,
+              {
+                backgroundColor: Colors.plannedColor.background,
+                borderBottomColor: Colors.plannedColor.background,
+                borderBottomWidth: 5,
+              },
+            ]}
             onPress={onPress}
             activeOpacity={0.9}
             disabled={parseFloat(value) === 0}
             key={idx}>
-            <View pointerEvents="none">
+            <View>
               <IndicatorChart
                 style={styles.chart}
                 datasets={[
@@ -120,7 +131,7 @@ const ProductCardStockIndicatorList = ({
         );
       }
     },
-    [I18n, formatNumber],
+    [I18n, formatNumber, Colors],
   );
 
   return (
@@ -130,17 +141,25 @@ const ProductCardStockIndicatorList = ({
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginHorizontal: '0',
+    marginVertical: 0,
   },
   chartContainer: {
-    width: '50%',
+    marginHorizontal: '0',
+    marginVertical: 0,
     flexDirection: 'row',
+    padding: 0,
+    flex: 1,
+    minWidth: '50%',
   },
   chart: {
-    alignSelf: 'stretch',
-    flex: 1,
+    width: '100%',
+    marginHorizontal: '0',
+    marginVertical: 0,
+    borderRadius: 0,
   },
 });
 

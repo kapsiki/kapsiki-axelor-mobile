@@ -164,7 +164,12 @@ const Navigator = ({mainMenu, onRefresh, versionCheckConfig}) => {
         {Object.entries(modulesScreens).map(
           ([
             key,
-            {component, title, actionID, options = {shadedHeader: true}},
+            {
+              component,
+              title,
+              actionID,
+              options = {shadedHeader: false, headerShown: true},
+            },
           ]) => {
             const renderTitle = () => (
               <Header
@@ -180,6 +185,7 @@ const Navigator = ({mainMenu, onRefresh, versionCheckConfig}) => {
                 name={key}
                 component={component}
                 options={{
+                  headerShown: options?.headerShown,
                   headerStyle: [
                     {elevation: 0},
                     Platform.OS === 'ios' && !options?.shadedHeader

@@ -101,7 +101,88 @@ export const lightTheme: Theme = {
     placeholderTextColor: '#C0C0C0',
   },
 };
-
+export const kapsikiTheme: Theme = {
+  key: 'kapsiki',
+  name: 'Kapsiki',
+  isCustom: false,
+  colors: {
+    screenBackgroundColor: '#f1f1f1',
+    backgroundColor: '#ffffff',
+    primaryColor: {
+      background_light: '#666666',
+      foreground: '#ffffff',
+      background: '#444444',
+    },
+    secondaryColor: {
+      background_light: '#a1a1a1',
+      foreground: '#ffffff',
+      background: '#838383',
+    },
+    secondaryColor_dark: {
+      background_light: '#606060',
+      foreground: '#ffffff',
+      background: '#1d1d1d',
+    },
+    errorColor: {
+      background_light: '#e85a94',
+      foreground: '#ffffff',
+      background: '#d82d6a',
+    },
+    cautionColor: {
+      background_light: '#ffec33',
+      foreground: '#1d1d1d',
+      background: '#fde800',
+    },
+    plannedColor: {
+      background_light: '#f7f7f9',
+      foreground: '#1d1d1d',
+      background: '#f5f5f8',
+    },
+    progressColor: {
+      background_light: '#ffec33',
+      foreground: '#1d1d1d',
+      background: '#fde800',
+    },
+    priorityColor: {
+      background_light: '#666666',
+      foreground: '#ffffff',
+      background: '#444444',
+    },
+    defaultColor: {
+      background_light: '#a1a1a1',
+      foreground: '#ffffff',
+      background: '#838383',
+    },
+    importantColor: {
+      background_light: '#e85a94',
+      foreground: '#ffffff',
+      background: '#d82d6a',
+    },
+    successColor: {
+      background_light: '#666666',
+      foreground: '#ffffff',
+      background: '#444444',
+    },
+    warningColor: {
+      background_light: '#ffec33',
+      foreground: '#1d1d1d',
+      background: '#fde800',
+    },
+    inverseColor: {
+      background_light: '#a1a1a1',
+      foreground: '#ffffff',
+      background: '#838383',
+    },
+    infoColor: {
+      background_light: '#666666',
+      foreground: '#ffffff',
+      background: '#444444',
+    },
+    ...bootstrapColors,
+    text: '#1d1d1d',
+    placeholderTextColor: '#bebebe',
+  },
+};
 export const purpleTheme: Theme = {
   key: 'purple',
   name: 'Purple',

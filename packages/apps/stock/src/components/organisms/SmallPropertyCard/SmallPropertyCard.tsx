@@ -18,7 +18,13 @@
 
 import React, {useMemo, useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
-import {Alert, Card, Text, useDigitFormat} from '@axelor/aos-mobile-ui';
+import {
+  Alert,
+  Card,
+  Text,
+  useDigitFormat,
+  useThemeColor,
+} from '@axelor/aos-mobile-ui';
 
 interface SmallPropertyCardProps {
   style?: any;
@@ -48,9 +54,18 @@ const SmallPropertyCard = ({
     () => (formatValueToNumber ? formatNumber(value) : value),
     [formatNumber, formatValueToNumber, value],
   );
-
+  const Colors = useThemeColor();
   return (
-    <Card style={[styles.card, style]}>
+    <Card
+      style={[
+        styles.card,
+        style,
+        {
+          borderBottomColor: Colors.plannedColor.background,
+          borderBottomWidth: 1,
+          borderRadius: 0,
+        },
+      ]}>
       <Alert
         style={styles.alert}
         visible={popUp}
@@ -85,11 +100,12 @@ const styles = StyleSheet.create({
   },
   card: {
     paddingHorizontal: 0,
-    paddingVertical: 4,
+    paddingVertical: 10,
     paddingRight: 4,
     flexDirection: 'column',
     alignItems: 'center',
-    marginVertical: '1%',
+    // marginVertical: 10,
+    gap: 5,
   },
   container: {
     alignItems: 'center',

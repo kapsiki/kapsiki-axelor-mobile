@@ -109,6 +109,12 @@ const TaskView = () => {
       renderListItem={({item}) => (
         <TaskActionCard
           task={item}
+          style={{
+            marginHorizontal: 0,
+            marginVertical: 0,
+            borderRadius: 0,
+            paddingHorizontal: 0,
+          }}
           onPress={() => {
             navigation.popTo('TaskDetailsScreen', {projecTaskId: item.id});
           }}
