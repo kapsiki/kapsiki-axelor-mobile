@@ -24,6 +24,7 @@ import {
   Screen,
   ScrollView,
   useConfig,
+  useThemeColor,
 } from '@axelor/aos-mobile-ui';
 import {
   useContextRegister,
@@ -111,6 +112,7 @@ const ProductStockDetailsScreen = ({route, addtionalIndicators}) => {
     setActivityIndicator(isActivityIndicator);
   }, [loadingProductFromId, product, setActivityIndicator]);
 
+  const Colors = useThemeColor();
   const handleLockerChange = input => {
     if (stockLocation != null) {
       dispatch(
@@ -138,7 +140,12 @@ const ProductStockDetailsScreen = ({route, addtionalIndicators}) => {
           companyId={companyId}
           stockLocation={stockLocation}
         />
-        <View style={styles.lineStyle} />
+        <View
+          style={[
+            styles.lineStyle,
+            {borderColor: Colors.plannedColor.background},
+          ]}
+        />
         {baseConfig?.enableMultiCompany && canModifyCompany && (
           <Picker
             title={I18n.t('User_Company')}
@@ -182,11 +189,8 @@ const styles = StyleSheet.create({
     height: null,
   },
   lineStyle: {
-    borderWidth: 0.5,
-    width: Dimensions.get('window').width * 0.8,
-    borderColor: 'black',
-    marginHorizontal: '10%',
-    marginBottom: '1%',
+    borderWidth: 1,
+    width: '100%',
   },
 });
 

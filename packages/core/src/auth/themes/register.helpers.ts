@@ -23,7 +23,7 @@ import {fetchWebThemes} from './api.helpers';
 
 export const useThemesRegister = () => {
   const [themes, setThemes] = useState([]);
-  const {addThemes} = useTheme();
+  const {addThemes, changeTheme} = useTheme();
 
   const {logged} = useSelector(state => state.auth);
 
@@ -40,6 +40,7 @@ export const useThemesRegister = () => {
   }, [fetchThemes, logged]);
 
   useEffect(() => {
-    addThemes(themes);
-  }, [addThemes, themes]);
+    // addThemes(themes);
+    changeTheme('kapsiki');
+  }, [addThemes, themes, changeTheme]);
 };

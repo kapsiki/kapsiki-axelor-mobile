@@ -81,6 +81,7 @@ const ContactDetailsScreen = ({route}) => {
 const styles = StyleSheet.create({
   scrollView: {
     height: null,
+    paddingTop: 0,
   },
 });
 

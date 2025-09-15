@@ -50,7 +50,7 @@ function ProductionFileSmallCard({
         <HtmlInput
           defaultInput={description}
           readonly={true}
-          editorBackgroundColor={Colors.screenBackgroundColor}
+          editorBackgroundColor={Colors.backgroundColor}
         />
       </View>
     </View>

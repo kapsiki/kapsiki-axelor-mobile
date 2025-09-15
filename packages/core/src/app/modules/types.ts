@@ -59,6 +59,7 @@ export type Menu = MenuWithSubMenus | RootMenuWithScreen | MenuSeparator;
 
 interface ScreenOptions {
   shadedHeader: boolean;
+  headerShown?: boolean;
 }
 
 export interface Screen {
