@@ -1,0 +1,23 @@
+{
+  "Kapsiki_Welcome": "Accueil",
+  "Kapsiki_Welcome_message": "Ceci est un message d'exemple pour le module d'accueil de Kapsiki.",
+  "Welcome": "Accueil",
+  "filter_categories": "Filtrer les catégories",
+  "no_results": "Aucun résultat trouvé",
+  "search_placeholder": "Rechercher...",
+  "loading": "Chargement...",
+  "error_fetching_data": "Erreur lors de la récupération des données",
+  "retry": "Réessayer",
+  "select_all": "Tout sélectionner",
+  "apply_filters": "Appliquer les filtres",
+  "search_projects": "Projets",
+  "search_documents": "Documents",
+  "search_leads": "Leads",
+  "search_prospects": "Prospects",
+  "search_contacts": "Contacts",
+  "search_clients": "Clients",
+  "search_others": "Autres",
+  "no_description": "Aucune description disponible",
+  "no_folder": "Fichier",
+  "folder": "Dossier"
+}

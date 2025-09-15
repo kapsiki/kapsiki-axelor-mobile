@@ -108,7 +108,7 @@ const BottomBar = ({
         <View key={item.key} onLayout={event => onItemLayout(event, item.key)}>
           <BarItem
             {...item}
-            title={manageActiveTitle ? undefined : item.title}
+            title={manageActiveTitle && item.title}
             size={itemSize}
             onPress={() => handleItemPress(item)}
             isSelected={selectedKey === item.key && !('onPress' in item)}
@@ -172,10 +172,10 @@ const BottomBar = ({
               ]}
             />
           </View>
-          <ItemTitle
+          {/* <ItemTitle
             title={manageActiveTitle ? activeView?.title : undefined}
             style={styles.title}
-          />
+          /> */}
         </Card>
       </View>
     </View>
@@ -191,9 +191,10 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingVertical: 10,
     flexDirection: 'column',
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
-    marginBottom: 10,
+    height: 66,
+    marginBottom: 33,
   },
   itemsContainer: {
     flexDirection: 'row',
