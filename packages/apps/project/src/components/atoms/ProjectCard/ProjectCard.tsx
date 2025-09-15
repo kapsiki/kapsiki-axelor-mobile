@@ -72,7 +72,14 @@ const ProjectCard = ({
   return (
     <ObjectCard
       onPress={onPress}
-      style={[borderStyle, style]}
+      style={[
+        borderStyle,
+        style,
+        {
+          borderBottomWidth: 1,
+          borderBottomColor: Colors.plannedColor.background,
+        },
+      ]}
       showArrow={!isCopyCard}
       leftContainerFlex={9}
       image={
@@ -140,6 +147,7 @@ const getStyles = (color: string) =>
   StyleSheet.create({
     border: {
       borderLeftWidth: 7,
+      borderRadius: 0,
       borderLeftColor: color,
     },
   });

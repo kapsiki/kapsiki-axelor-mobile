@@ -5,6 +5,7 @@ import screens from './screens';
 export const KapsikiModule: Module = {
   name: 'kapsiki-welcome',
   title: 'Kapsiki_Welcome',
+  icon: 'house-door',
   subtitle: 'Kapsiki_Welcome',
   translations: {
     en: enTranslations,
@@ -13,7 +14,7 @@ export const KapsikiModule: Module = {
   menus: {
     welcome_menu: {
       title: 'Kapsiki_Welcome',
-      icon: 'clipboard2-check',
+      icon: 'house-door',
       screen: 'HomeScreen',
     },
   },
