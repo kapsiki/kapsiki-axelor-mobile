@@ -1,19 +1,17 @@
 import React from 'react';
 import {Header} from '../components/header';
 import {useTranslator} from '@axelor/aos-mobile-core';
+import {ProjectsList} from '../components/projects-list';
 import {SearchButton} from '../components/search-button';
-import {QuickLinks} from '../components/quick-links';
-import {UpcomingEvents} from '../components/upcoming-event';
-const WelcomeHomeView = () => {
+const ProjectsHomeView = () => {
   const I18n = useTranslator();
   return (
     <>
-      <Header title={I18n.t('Welcome')} />
+      <Header title={I18n.t('projects')} />
       <SearchButton />
-      <QuickLinks />
-      <UpcomingEvents />
+      <ProjectsList />
     </>
   );
 };
 
-export default WelcomeHomeView;
+export default ProjectsHomeView;

@@ -67,5 +67,9 @@
   "tomorrow": "Demain",
   "future_events": "Événements futurs",
   "from": "À partir de",
-  "add_event": "Ajouter un événement"
+  "add_event": "Ajouter un événement",
+  "business_project": "Projet professionnel",
+  "personal_project": "Projet personnel",
+  "no_projects_found": "Aucun projet trouvé",
+  "view_all_projects": "Voir tous les projets"
 }

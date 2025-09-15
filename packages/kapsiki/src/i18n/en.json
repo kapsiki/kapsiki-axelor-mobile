@@ -67,5 +67,9 @@
   "tomorrow": "Tomorrow",
   "future_events": "Future Events",
   "from": "From",
-  "add_event": "Add Event"
+  "add_event": "Add Event",
+  "business_project": "Business Project",
+  "personal_project": "Personal Project",
+  "no_projects_found": "No projects found",
+  "view_all_projects": "View All Projects"
 }

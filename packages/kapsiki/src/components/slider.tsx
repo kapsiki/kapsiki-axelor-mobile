@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonDisabled: {
-    opacity: 0.35,
+    opacity: 0,
   },
   buttonText: {
     color: 'white',

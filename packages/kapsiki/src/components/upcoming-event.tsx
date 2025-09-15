@@ -90,7 +90,13 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
       </Text>
 
       <Slider
-        showButtons={false}
+        buttonStyle={{
+          backgroundColor: Colors.plannedColor.background,
+          borderRadius: 50,
+        }}
+        buttonTextStyle={{
+          color: Colors.plannedColor.foreground,
+        }}
         slides={[
           <View
             style={{
