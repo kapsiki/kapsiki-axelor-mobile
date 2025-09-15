@@ -61,5 +61,11 @@
   "update": "Update",
   "updatequicklinks": "Update Quick Links",
   "cancel": "Cancel",
-  "save": "Save"
+  "save": "Save",
+  "upcomingEvents": "Upcoming Events",
+  "today": "Today",
+  "tomorrow": "Tomorrow",
+  "future_events": "Future Events",
+  "from": "From",
+  "add_event": "Add Event"
 }

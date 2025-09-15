@@ -61,5 +61,11 @@
   "update": "Mettre à jour",
   "updatequicklinks": "Mettre à jour les liens rapides",
   "cancel": "Annuler",
-  "save": "Enregistrer"
+  "save": "Enregistrer",
+  "upcomingEvents": "Événements à venir",
+  "today": "Aujourd'hui",
+  "tomorrow": "Demain",
+  "future_events": "Événements futurs",
+  "from": "À partir de",
+  "add_event": "Ajouter un événement"
 }
