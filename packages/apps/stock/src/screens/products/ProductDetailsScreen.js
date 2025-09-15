@@ -18,7 +18,12 @@
 
 import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Screen, ScrollView, NotesCard} from '@axelor/aos-mobile-ui';
+import {
+  Screen,
+  ScrollView,
+  NotesCard,
+  useThemeColor,
+} from '@axelor/aos-mobile-ui';
 import {
   useContextRegister,
   useDispatch,
@@ -56,7 +61,7 @@ const ProductDetailsScreen = ({route, navigation}) => {
   const navigateToImageProduct = () => {
     navigation.navigate('ProductImageScreen', {product: product});
   };
-
+  const Colors = useThemeColor();
   return (
     <Screen fixedItems={<ProductVariantButton product={product} />}>
       <ScrollView
@@ -73,9 +78,12 @@ const ProductDetailsScreen = ({route, navigation}) => {
           name={product.name}
           style={styles.item}
         />
-        <View style={styles.lineContainer}>
-          <View style={styles.lineStyle} />
-        </View>
+        <View
+          style={[
+            styles.lineStyle,
+            {borderColor: Colors.plannedColor.background},
+          ]}
+        />
         <ProductUnitInformations product={product} />
         <ProductPackingInformations product={product} />
         <NotesCard
@@ -99,8 +107,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   lineStyle: {
-    borderWidth: 0.7,
-    width: 280,
+    borderWidth: 0.5,
+    width: '100%',
   },
 });
 

@@ -64,11 +64,14 @@ const ProductUnitInformations = ({product}) => {
 
 const styles = StyleSheet.create({
   stockCard: {
-    marginHorizontal: '1.5%',
-    minWidth: '20%',
+    marginHorizontal: '0',
+    marginTop: 0,
+    marginBottom: 0,
+    minWidth: '50%',
+    flexGrow: 1,
   },
   stock: {
-    marginTop: 20,
+    marginTop: 0,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',

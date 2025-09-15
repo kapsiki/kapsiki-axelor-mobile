@@ -75,6 +75,7 @@ const TaskActionCard = ({
       <TaskCard
         onPress={onPress}
         name={task.name}
+        style={{marginHorizontal: 0, marginVertical: 0, borderRadius: 0}}
         assignedTo={task.assignedTo?.fullName}
         taskDeadline={task.taskDeadline}
         parentTask={

@@ -129,7 +129,7 @@ const getStyles = (Colors: ThemeColors) =>
       backgroundColor: Colors.backgroundColor,
     },
     tab: {
-      backgroundColor: Colors.screenBackgroundColor,
+      backgroundColor: Colors.backgroundColor,
       paddingHorizontal: 25,
       marginHorizontal: 5,
       paddingVertical: 10,
@@ -148,11 +148,11 @@ const getStyles = (Colors: ThemeColors) =>
       borderTopWidth: 4,
     },
     inactifTab: {
-      borderTopColor: Colors.screenBackgroundColor,
+      borderTopColor: Colors.backgroundColor,
       borderTopWidth: 4,
     },
     panel: {
-      backgroundColor: Colors.screenBackgroundColor,
+      backgroundColor: Colors.backgroundColor,
       height: '100%',
     },
   });

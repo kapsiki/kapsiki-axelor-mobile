@@ -18,7 +18,7 @@
 
 import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
-import {ActionCard} from '@axelor/aos-mobile-ui';
+import {ActionCard, useThemeColor} from '@axelor/aos-mobile-ui';
 import {isEmpty, linkingProvider, useTranslator} from '@axelor/aos-mobile-core';
 import {PartnerCard} from '../../atoms';
 
@@ -70,16 +70,35 @@ const PartnerActionCard = ({
     [I18n, isContact, partner],
   );
 
+  const Colors = useThemeColor();
+
   if (isEmpty(partner)) {
     return null;
   }
 
   return (
     <ActionCard
-      style={[styles.container, style]}
+      style={[
+        styles.container,
+        style,
+        {
+          marginHorizontal: 0,
+          marginVertical: 0,
+          paddingHorizontal: 0,
+        },
+      ]}
       actionList={actionList}
       translator={I18n.t}>
       <PartnerCard
+        style={{
+          marginHorizontal: 0,
+          marginVertical: 0,
+          padding: 20,
+          flex: 1,
+          borderRadius: 0,
+          borderBottomColor: Colors.plannedColor.background,
+          borderBottomWidth: 1,
+        }}
         picture={partner.picture}
         name={isContact ? partner.simpleFullName : partner.name}
         code={partner.partnerSeq}
@@ -92,9 +111,7 @@ const PartnerActionCard = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '90%',
-  },
+  container: {},
 });
 
 export default PartnerActionCard;

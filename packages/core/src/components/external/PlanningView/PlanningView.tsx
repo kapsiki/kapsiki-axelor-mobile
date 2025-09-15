@@ -237,7 +237,7 @@ const PlanningView = ({
           selectedDayTextColor: Colors.text,
           monthTextColor: Colors.text,
           selectedDayBackgroundColor: Colors.primaryColor.background_light,
-          backgroundColor: Colors.screenBackgroundColor,
+          backgroundColor: Colors.backgroundColor,
           dotColor: Colors.primaryColor.background,
           selectedDotColor: Colors.text,
           agendaDayTextColor: Colors.text,
