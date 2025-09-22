@@ -11,7 +11,7 @@ const WelcomeHomeView = () => {
       <Header title={I18n.t('Welcome')} />
       <SearchButton />
       <QuickLinks />
-      <UpcomingEvents />
+      {/* <UpcomingEvents /> */}
     </>
   );
 };
