@@ -28,6 +28,7 @@ const config = {
       new RegExp(`${moduleRoot}/node_modules/react/.*`),
       new RegExp(`${moduleRoot}/node_modules/react-native/.*`),
     ]),
+    sourceExts: ['jsx', 'js', 'ts', 'tsx', 'cjs', 'json', 'svg'],
   },
 };
 
