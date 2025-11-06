@@ -19,6 +19,7 @@
 import {Module} from '@axelor/aos-mobile-core';
 import enTranslations from './i18n/en.json';
 import frTranslations from './i18n/fr.json';
+import deTranslations from './i18n/de.json';
 import ProjectScreens from './screens/';
 import * as projectReducers from './features';
 import {
@@ -42,6 +43,7 @@ export const ProjectModule: Module = {
   translations: {
     en: enTranslations,
     fr: frTranslations,
+    de: deTranslations,
   },
   menus: {
     project_menu_activeProject: {
@@ -55,9 +57,9 @@ export const ProjectModule: Module = {
       screen: 'ProjectScreen',
     },
     project_menu_businessProjects: {
-      title: 'Project_BuisnessProjects',
+      title: 'Project_BusinessProjects',
       icon: 'briefcase-fill',
-      screen: 'BuisnessProjectScreen',
+      screen: 'BusinessProjectScreen',
     },
     project_menu_tasks: {
       title: 'Project_Tasks',

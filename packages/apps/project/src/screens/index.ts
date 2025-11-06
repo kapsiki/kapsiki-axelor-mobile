@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import BuisnessProjectScreen from './BuisnessProjectScreen';
+import BusinessProjectScreen from './BusinessProjectScreen';
 import ProjectDetailsScreen from './ProjectDetailsScreen';
 import ActiveProjectScreen from './ActiveProjectScreen';
 import ProjectScreen from './ProjectScreen';
@@ -25,9 +25,9 @@ import TaskFormScreen from './TaskFormScreen';
 import TaskListScreen from './TaskListScreen';
 
 export default {
-  BuisnessProjectScreen: {
-    title: 'Project_BuisnessProjects',
-    component: BuisnessProjectScreen,
+  BusinessProjectScreen: {
+    title: 'Project_BusinessProjects',
+    component: BusinessProjectScreen,
     options: {
       shadedHeader: false,
     },
@@ -80,7 +80,7 @@ export default {
 
 export {ActiveProjectScreen};
 export {ProjectScreen};
-export {BuisnessProjectScreen};
+export {BusinessProjectScreen};
 export {ProjectDetailsScreen};
 export {TaskListScreen};
 export {TaskDetailsScreen};

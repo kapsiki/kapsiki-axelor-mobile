@@ -18,14 +18,14 @@
 
 import React from 'react';
 import {Screen} from '@axelor/aos-mobile-ui';
-import {ProjectListView} from '../components';
+import {BusinessProjectListView} from '../components';
 
-const BuisnessProjectScreen = ({}) => {
+const BusinessProjectScreen = ({}) => {
   return (
     <Screen removeSpaceOnTop={true}>
-      <ProjectListView businessProject={true} />
+      <BusinessProjectListView businessProject={true} />
     </Screen>
   );
 };
 
-export default BuisnessProjectScreen;
+export default BusinessProjectScreen;
