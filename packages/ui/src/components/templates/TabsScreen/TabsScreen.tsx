@@ -198,7 +198,7 @@ const TabsScreen = ({
       style={[
         styles.container,
         {
-          backgroundColor: Colors.screenBackgroundColor,
+          backgroundColor: Colors.backgroundColor,
         },
         style,
       ]}>

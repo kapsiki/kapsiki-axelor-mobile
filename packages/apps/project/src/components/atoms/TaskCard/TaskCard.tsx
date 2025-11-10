@@ -76,7 +76,15 @@ const TaskCard = ({
   return (
     <ObjectCard
       onPress={onPress}
-      style={[borderStyle, styles.card, style]}
+      style={[
+        borderStyle,
+        styles.card,
+        style,
+        {
+          borderBottomWidth: 1,
+          borderBottomColor: Colors.plannedColor.background,
+        },
+      ]}
       iconLeftMargin={30}
       leftContainerFlex={2}
       showArrow={showArrow}
@@ -139,10 +147,11 @@ const getStyles = color =>
 
 const styles = StyleSheet.create({
   card: {
-    marginHorizontal: 2,
-    marginVertical: 2,
     padding: 0,
     marginRight: 5,
+    paddingVertical: 10,
+    height: 140,
+    justifyContent: 'center',
     paddingRight: 5,
     flex: 1,
   },

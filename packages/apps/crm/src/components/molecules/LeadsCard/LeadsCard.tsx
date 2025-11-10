@@ -18,7 +18,7 @@
 
 import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
-import {StarScore, ObjectCard} from '@axelor/aos-mobile-ui';
+import {StarScore, ObjectCard, useThemeColor} from '@axelor/aos-mobile-ui';
 import {useBinaryPictureUri, useTypeHelpers} from '@axelor/aos-mobile-core';
 
 interface LeadsCardProps {
@@ -57,6 +57,7 @@ const LeadsCard = ({
 }: LeadsCardProps) => {
   const formatBinaryFile = useBinaryPictureUri();
   const {getItemColorFromIndex} = useTypeHelpers();
+  const Colors = useThemeColor();
 
   const borderStyle = useMemo(
     () =>
@@ -68,7 +69,18 @@ const LeadsCard = ({
   return (
     <ObjectCard
       onPress={onPress}
-      style={[borderStyle, style]}
+      style={[
+        borderStyle,
+        style,
+        {
+          borderBottomColor: Colors.plannedColor.background,
+          borderBottomWidth: 1,
+          padding: 40,
+          height: 140,
+          gap: 10,
+          justifyContent: 'center',
+        },
+      ]}
       showArrow={true}
       image={{
         generalStyle: styles.imageSize,
