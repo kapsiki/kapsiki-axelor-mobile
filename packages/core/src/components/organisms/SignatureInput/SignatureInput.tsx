@@ -91,7 +91,7 @@ const SignatureInput = ({
   );
 
   const canvaStyle = useMemo(
-    () => getCanvaStyles(Colors.screenBackgroundColor),
+    () => getCanvaStyles(Colors.backgroundColor),
     [Colors],
   );
 
@@ -213,7 +213,7 @@ const SignatureInput = ({
         <View style={styles.signatureContainer}>
           <Signature
             webStyle={canvaStyle}
-            backgroundColor={Colors.screenBackgroundColor}
+            backgroundColor={Colors.backgroundColor}
             dataURL={returnBase64String ? defaultValue : null}
             ref={ref}
             onOK={handleSignature}

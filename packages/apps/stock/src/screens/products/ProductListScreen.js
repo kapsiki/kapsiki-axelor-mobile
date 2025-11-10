@@ -17,7 +17,7 @@
  */
 
 import React, {useCallback, useMemo, useState} from 'react';
-import {Screen} from '@axelor/aos-mobile-ui';
+import {Screen, useThemeColor} from '@axelor/aos-mobile-ui';
 import {
   displayItemName,
   SearchListView,
@@ -59,6 +59,8 @@ const ProductListScreen = ({navigation}) => {
     [alternativeBarcodeList],
   );
 
+  const Color = useThemeColor();
+
   return (
     <Screen removeSpaceOnTop={true}>
       <SearchListView
@@ -78,7 +80,7 @@ const ProductListScreen = ({navigation}) => {
             sliceFunction={searchProducts}
             sliceFunctionData={sliceFunctionData}
             placeholderSearchBar={I18n.t('Stock_Product')}
-            onChangeValue={showProductDetails}
+            // onChangeValue={showProductDetails}
             displayValue={displayItemName}
             sliceBarCodeFunction={searchAlternativeBarcode}
             displayBarCodeInput={baseConfig?.enableMultiBarcodeOnProducts}
@@ -92,6 +94,11 @@ const ProductListScreen = ({navigation}) => {
         }
         renderListItem={({item}) => (
           <ProductCard
+            style={{
+              borderRadius: 0,
+              borderBottomWidth: 1,
+              borderBottomColor: Color.plannedColor.background,
+            }}
             key={item.id}
             productId={item.id}
             productVersion={item.version}
