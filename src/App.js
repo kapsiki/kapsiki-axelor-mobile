@@ -50,7 +50,7 @@ const App = () => {
         PurchaseModule,
         MessageModule,
       ]}
-      mainMenu="auth_menu_user"
+      mainMenu="project_menu_assignedToMe_tasks"
       version={application_properties.version}
       configuration={app_config}
     />

@@ -5,9 +5,9 @@ export const app_config = {
    * when the application is running in debug mode
    */
   testInstanceConfig: {
-    defaultUrl: '',
-    defaultUsername: '',
-    defaultPassword: '',
+    defaultUrl: 'https://dev.mgm.kapsiki.net/',
+    defaultUsername: 'fwagni',
+    defaultPassword: 'fwagni123#',
   },
 
   /*

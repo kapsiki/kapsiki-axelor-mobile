@@ -64,6 +64,11 @@ export const ProjectModule: Module = {
       icon: 'card-list',
       screen: 'TaskListScreen',
     },
+    project_menu_assignedToMe_tasks: {
+      title: 'Project_MyTasks',
+      icon: 'card-list',
+      screen: 'TaskAssignedToMeListScreen',
+    },
   },
   screens: {
     ...ProjectScreens,

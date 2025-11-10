@@ -31,7 +31,9 @@
     "@axelor/aos-mobile-hr": "8.4.3",
     "@axelor/aos-mobile-message": "8.4.3",
     "@axelor/aos-mobile-ui": "8.4.3",
-    "@reduxjs/toolkit": "^2.2.7"
+    "@react-native-vector-icons/material-design-icons": "^12.4.0",
+    "@reduxjs/toolkit": "^2.2.7",
+    "react-native-paper": "^5.14.5"
   },
   "devDependencies": {
     "@babel/runtime": "^7.20.0",

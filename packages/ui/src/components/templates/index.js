@@ -19,5 +19,6 @@
 export {default as BottomBar} from './BottomBar/BottomBar';
 export * from './Dashboard';
 export {default as ObjectCard} from './ObjectCard/ObjectCard';
+export {default as ModernObjectCard} from './ModernObjectCard/ModernObjectCard';
 export {default as TabsScreen} from './TabsScreen/TabsScreen';
 export {default as TreeView} from './TreeView/TreeView';
