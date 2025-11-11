@@ -75,6 +75,10 @@ export default {
   TaskFormScreen: {
     title: 'Project_Task',
     component: TaskFormScreen,
+    options: {
+      shadedHeader: false,
+    },
+    actionID: 'project_projectTask_form',
   },
 };
 

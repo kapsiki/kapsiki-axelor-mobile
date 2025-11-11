@@ -9,6 +9,7 @@ import {
   useNavigation,
 } from '@axelor/aos-mobile-core';
 import Slider from './slider';
+import {searchProjectTask} from '@axelor/aos-mobile-project/lib/api/project-task-api';
 
 export type UpcomingEventsProps = {};
 
@@ -31,6 +32,7 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
   }, []);
   const todayEvents = useMemo(
     () =>
+      monthlyEvents &&
       monthlyEvents.filter(event => {
         const eventDate = new Date(event.startDateTime);
         return (
@@ -48,6 +50,7 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
   };
   const tomorrowEvents = useMemo(
     () =>
+      monthlyEvents &&
       monthlyEvents.filter(event => {
         const eventDate = new Date(event.startDateTime);
         return (
@@ -60,6 +63,7 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
   );
   const nextUpcomingEvents = useMemo(
     () =>
+      monthlyEvents &&
       monthlyEvents.filter(event => {
         const eventDate = new Date(event.startDateTime);
         return eventDate > tomorrow;
@@ -71,12 +75,31 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
   useEffect(() => {
     (async () => {
       // get tomorrows util function
+      const t = (await (searchProjectTask as any)({searchValue: '', page: 0}))
+        .data.data as {
+        name: string;
+        taskDate: string;
+        taskEndDate?: string;
+        taskDeadline?: string;
+      }[];
+
       const r = await (getPlannedEvent as any)({
         date: today,
       });
-      setMonthlyEvents(r.data.data);
+
+      setMonthlyEvents(
+        t && [
+          ...r.data.data,
+          ...t.map(item => ({
+            subject: item.name,
+            endDateTime: item.taskEndDate,
+            startDateTime: item.taskDate,
+          })),
+        ],
+      );
     })();
   }, [today]);
+
   return (
     <View style={{paddingVertical: 20, gap: 20}}>
       <Text
@@ -94,6 +117,7 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
           backgroundColor: Colors.plannedColor.background,
           borderRadius: 50,
         }}
+        showButtons={false}
         buttonTextStyle={{
           color: Colors.plannedColor.foreground,
         }}
@@ -171,49 +195,52 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
                     paddingLeft: 20,
                     gap: 5,
                   }}>
-                  {todayEvents.slice(0, 3).map((event, index) => (
-                    <View
-                      key={index}
-                      style={{
-                        // borderColor: Colors.plannedColor.background,
-                        padding: 10,
-                        borderLeftColor: Colors.primaryColor.background,
-                        borderLeftWidth: 5,
-                        backgroundColor: Colors.plannedColor.background,
-                        height: 60,
-                        justifyContent: 'center',
-                        gap: 5,
-                      }}>
-                      <Text
+                  {todayEvents &&
+                    todayEvents.slice(0, 3).map((event, index) => (
+                      <View
+                        key={index}
                         style={{
-                          fontSize: 12,
-                          fontWeight: 'bold',
+                          // borderColor: Colors.plannedColor.background,
+                          padding: 10,
+                          borderLeftColor: Colors.primaryColor.background,
+                          borderLeftWidth: 5,
+                          backgroundColor: Colors.plannedColor.background,
+                          height: 60,
+                          justifyContent: 'center',
+                          gap: 5,
                         }}>
-                        {new Date(event.startDateTime).toLocaleTimeString(
-                          undefined,
-                          {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          },
-                        )}{' '}
-                        -{' '}
-                        {new Date(event.endDateTime).toLocaleTimeString(
-                          undefined,
-                          {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          },
+                        {event.endDateTime && (
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              fontWeight: 'bold',
+                            }}>
+                            {new Date(event.startDateTime).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              },
+                            )}{' '}
+                            -{' '}
+                            {new Date(event.endDateTime).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              },
+                            )}
+                          </Text>
                         )}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 'normal',
-                        }}>
-                        {event.subject}
-                      </Text>
-                    </View>
-                  ))}
+                        <Text
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 'normal',
+                          }}>
+                          {event.subject}
+                        </Text>
+                      </View>
+                    ))}
                 </View>
               </View>
             </View>
@@ -291,49 +318,52 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
                     paddingLeft: 20,
                     gap: 5,
                   }}>
-                  {tomorrowEvents.slice(0, 3).map((event, index) => (
-                    <View
-                      key={index}
-                      style={{
-                        // borderColor: Colors.plannedColor.background,
-                        padding: 10,
-                        borderLeftColor: Colors.primaryColor.background,
-                        borderLeftWidth: 5,
-                        backgroundColor: Colors.plannedColor.background,
-                        height: 60,
-                        justifyContent: 'center',
-                        gap: 5,
-                      }}>
-                      <Text
+                  {tomorrowEvents &&
+                    tomorrowEvents.slice(0, 3).map((event, index) => (
+                      <View
+                        key={index}
                         style={{
-                          fontSize: 12,
-                          fontWeight: 'bold',
+                          // borderColor: Colors.plannedColor.background,
+                          padding: 10,
+                          borderLeftColor: Colors.primaryColor.background,
+                          borderLeftWidth: 5,
+                          backgroundColor: Colors.plannedColor.background,
+                          height: 60,
+                          justifyContent: 'center',
+                          gap: 5,
                         }}>
-                        {new Date(event.startDateTime).toLocaleTimeString(
-                          undefined,
-                          {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          },
-                        )}{' '}
-                        -{' '}
-                        {new Date(event.endDateTime).toLocaleTimeString(
-                          undefined,
-                          {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          },
+                        {event.endDateTime && (
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              fontWeight: 'bold',
+                            }}>
+                            {new Date(event.startDateTime).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              },
+                            )}{' '}
+                            -{' '}
+                            {new Date(event.endDateTime).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              },
+                            )}
+                          </Text>
                         )}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 'normal',
-                        }}>
-                        {event.subject}
-                      </Text>
-                    </View>
-                  ))}
+                        <Text
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 'normal',
+                          }}>
+                          {event.subject}
+                        </Text>
+                      </View>
+                    ))}
                 </View>
               </View>
             </View>
@@ -412,42 +442,52 @@ export const UpcomingEvents: FunctionComponent<UpcomingEventsProps> = () => {
                     paddingLeft: 20,
                     gap: 5,
                   }}>
-                  {nextUpcomingEvents.slice(0, 3).map((event, index) => (
-                    <View
-                      key={index}
-                      style={{
-                        // borderColor: Colors.plannedColor.background,
-                        padding: 10,
-                        borderLeftColor: Colors.primaryColor.background,
-                        borderLeftWidth: 5,
-                        backgroundColor: Colors.plannedColor.background,
-                        height: 60,
-                        justifyContent: 'center',
-                        gap: 5,
-                      }}>
-                      <Text
+                  {nextUpcomingEvents &&
+                    nextUpcomingEvents.slice(0, 3).map((event, index) => (
+                      <View
+                        key={index}
                         style={{
-                          fontSize: 12,
-                          fontWeight: 'bold',
+                          // borderColor: Colors.plannedColor.background,
+                          padding: 10,
+                          borderLeftColor: Colors.primaryColor.background,
+                          borderLeftWidth: 5,
+                          backgroundColor: Colors.plannedColor.background,
+                          height: 60,
+                          justifyContent: 'center',
+                          gap: 5,
                         }}>
-                        {new Date(event.startDateTime).toLocaleDateString(
-                          undefined,
-                          {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric',
-                          },
+                        {event.endDateTime && (
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              fontWeight: 'bold',
+                            }}>
+                            {new Date(event.startDateTime).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              },
+                            )}{' '}
+                            -{' '}
+                            {new Date(event.endDateTime).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              },
+                            )}
+                          </Text>
                         )}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 'normal',
-                        }}>
-                        {event.subject}
-                      </Text>
-                    </View>
-                  ))}
+                        <Text
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 'normal',
+                          }}>
+                          {event.subject}
+                        </Text>
+                      </View>
+                    ))}
                 </View>
               </View>
             </View>
