@@ -19,15 +19,21 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useTranslator} from '@axelor/aos-mobile-core';
-import {Text} from '@axelor/aos-mobile-ui';
+import {Text, useThemeColor} from '@axelor/aos-mobile-ui';
 import {SmallPropertyCard} from '../../../organisms';
 
 const ProductPackingInformations = ({product}) => {
   const I18n = useTranslator();
-
+  const Colors = useThemeColor();
   return (
     <View style={styles.containerPack}>
-      <Text style={styles.titles}>{I18n.t('Stock_Packing')}</Text>
+      <Text
+        style={[
+          styles.titles,
+          {backgroundColor: Colors.plannedColor.background},
+        ]}>
+        {I18n.t('Stock_Packing')}
+      </Text>
       <View style={styles.packing}>
         <SmallPropertyCard
           style={styles.packingCard}
@@ -91,17 +97,22 @@ const ProductPackingInformations = ({product}) => {
 
 const styles = StyleSheet.create({
   containerPack: {
-    marginHorizontal: '5%',
-    marginTop: 18,
+    marginHorizontal: '0%',
   },
   titles: {
-    marginHorizontal: '5%',
+    marginHorizontal: 0,
+    paddingTop: 20,
+    paddingBottom: 20,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   packingCard: {
-    marginHorizontal: '2%',
-    marginTop: 5,
-    minWidth: '28%',
-    marginBottom: '2%',
+    marginHorizontal: '0',
+    marginTop: 0,
+    marginBottom: 0,
+    minWidth: '50%',
+    flexGrow: 1,
   },
   packing: {
     flexDirection: 'row',

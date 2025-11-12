@@ -19,5 +19,5 @@
 export * from './color.defaults';
 export * from './content.helpers';
 export {ThemeProvider, useTheme, useThemeColor} from './ThemeContext';
-export {lightTheme, purpleTheme, colorBlindTheme} from './themes';
+export {lightTheme, purpleTheme, colorBlindTheme, kapsikiTheme} from './themes';
 export {Theme, ThemeColors, Color} from './types';

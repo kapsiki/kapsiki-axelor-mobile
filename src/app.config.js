@@ -108,7 +108,7 @@ export const app_config = {
    * This configuration allows you to customize the logo displayed on the login screen.
    * By default, the application display the Axelor logo.
    */
-  logoFile: require('../asset/mgm_logo.png'),
+  logoFile: require('../asset/provisionato_logo.png'),
 
   /*
    * This configuration allows you to enable or disable WebSocket support within the application.

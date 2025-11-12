@@ -124,8 +124,9 @@ const ProspectsListScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   item: {
-    marginHorizontal: 12,
-    marginVertical: 4,
+    marginHorizontal: 0,
+    marginVertical: 0,
+    borderRadius: 0,
   },
   headerItem: {
     alignSelf: 'center',

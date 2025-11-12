@@ -21,6 +21,53 @@ import * as coreReducers from '../features';
 
 export const configGlobalStore = externalReducers => {
   return configureStore({
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        immutableCheck: {
+          // Increase timeout threshold from default 32ms to 128ms
+          warnAfter: 128,
+          // Ignore paths with large, trusted data that don't need mutation checking
+          ignoredPaths: [
+            // Add specific paths to large state slices you trust
+            // Example: 'project.fullProjectList', 'cache.largeDataSet'
+          ],
+        },
+        serializableCheck: {
+          // Increase timeout for serializable checks
+          warnAfter: 128,
+          // Ignore specific action types that might contain non-serializable data
+          ignoredActions: [
+            // Add action types that contain functions, dates, etc.
+            // Example: 'form/SET_FIELD_DEPENDENCY'
+          ],
+          ignoredActionsPaths: [
+            // Ignore specific paths in actions
+            // Example: 'payload.callback', 'meta.timestamp'
+          ],
+          ignoredPaths: [
+            // Ignore state paths with non-serializable data
+            // Example: 'form.fieldValidators', 'ui.componentRefs'
+          ],
+        },
+      }),
+    // Enable Redux DevTools in development only
+    devTools: process.env.NODE_ENV !== 'production' && {
+      // Limit the number of actions stored in DevTools to prevent memory issues
+      maxAge: 50,
+      // Collapse actions by default to improve performance
+      actionsBlacklist: [],
+      // Serialize action and state sanitizers
+      actionSanitizer: action => ({
+        ...action,
+        // Remove large payloads from DevTools display
+        payload:
+          action.payload &&
+          typeof action.payload === 'object' &&
+          Object.keys(action.payload).length > 20
+            ? '[Large Object]'
+            : action.payload,
+      }),
+    },
     reducer: {
       ...coreReducers,
       ...externalReducers,
