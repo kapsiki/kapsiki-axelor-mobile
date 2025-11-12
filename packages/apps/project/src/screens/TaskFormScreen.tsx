@@ -63,27 +63,33 @@ const TaskFormScreen = ({navigation, route}) => {
 
   const _defaultValue = useMemo(() => {
     if (!isCreation && !isEmpty(projectTask)) {
-      return {...projectTask};
+      return {
+        ...projectTask,
+      };
+    } else {
+      return null;
     }
-    return {}; // <-- éviter null
   }, [isCreation, projectTask]);
 
-  const creationDefaultValue = useMemo(() => {
-    if (!project || !ProjectTask || !Project) return {}; // <-- fallback vide
-
-    return {
+  const creationDefaultValue = useMemo(
+    () => ({
       project,
       projectReadonly: true,
       taskDate: new Date().toISOString().split('T')[0],
       progress: 0,
-      typeSelect: ProjectTask?.typeSelect?.Task ?? null,
+      typeSelect: ProjectTask?.typeSelect.Task,
       activeSprint:
         project?.sprintManagementSelect ===
-        Project?.sprintManagementSelect?.Project
+        Project?.sprintManagementSelect.Project
           ? project?.backlogSprint
           : null,
-    };
-  }, [project, ProjectTask, Project]);
+    }),
+    [
+      project,
+      ProjectTask?.typeSelect.Task,
+      Project?.sprintManagementSelect.Project,
+    ],
+  );
 
   const saveTaskAPI = useCallback(
     (objectState, dispatch) => {
