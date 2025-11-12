@@ -23,4 +23,5 @@ export {default as TaskGeneralInformationView} from './TaskGeneralInformationVie
 export {default as TaskLinkView} from './TaskLinkView/TaskLinkView';
 export {default as SubProjectView} from './SubProjectView/SubProjectView';
 export {default as TaskView} from './TaskView/TaskView';
+export {default as TaskAssignedToMeView} from './TaskAssignedToMeView/TaskAssignedToMeView';
 export {default as TimeView} from './TimeView/TimeView';

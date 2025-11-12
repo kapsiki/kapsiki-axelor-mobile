@@ -17,6 +17,7 @@
  */
 
 import React, {useEffect, useMemo, useState} from 'react';
+import { PaperProvider } from 'react-native-paper';
 import {Provider} from 'react-redux';
 import {
   ConfigProvider,
@@ -124,6 +125,7 @@ const ContextsProvider = ({
 
   return (
     <Provider store={store} identityFunctionCheck="never">
+      <PaperProvider>
       <OutsideAlerterProvider>
         <ThemeProvider
           themes={themes}
@@ -139,6 +141,7 @@ const ContextsProvider = ({
           </WritingThemeProvider>
         </ThemeProvider>
       </OutsideAlerterProvider>
+      </PaperProvider>
     </Provider>
   );
 };
