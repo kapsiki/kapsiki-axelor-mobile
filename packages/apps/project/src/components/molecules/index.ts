@@ -27,4 +27,5 @@ export {default as ProjectHeader} from './ProjectHeader/ProjectHeader';
 export {default as ProjectSiteTags} from './ProjectSiteTags/ProjectSiteTags';
 export {default as SectionHeader} from './SectionHeader/SectionHeader';
 export {default as TaskActionCard} from './TaskActionCard/TaskActionCard';
+export {default as ModernTaskActionCard} from './ModernTaskActionCard/ModernTaskActionCard';
 export {default as TaskDetailsHeader} from './TaskDetailsHeader/TaskDetailsHeader';

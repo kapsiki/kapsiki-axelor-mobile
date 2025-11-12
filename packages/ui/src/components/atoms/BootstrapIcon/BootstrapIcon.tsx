@@ -27,7 +27,7 @@ interface BootstrapIconProps {
   name: string;
   size: number;
   color: ColorValue;
-  style?: React.CSSProperties | unknown;
+  style?: React.CSSProperties | unknown
 }
 
 const BootstrapIcon = ({name, size, color, style}: BootstrapIconProps) => {

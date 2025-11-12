@@ -23,6 +23,7 @@ import ProjectScreen from './ProjectScreen';
 import TaskDetailsScreen from './TaskDetailsScreen';
 import TaskFormScreen from './TaskFormScreen';
 import TaskListScreen from './TaskListScreen';
+import TaskAssignedToMeListScreen from './TaskAssignedToMeListScreen';
 
 export default {
   BuisnessProjectScreen: {
@@ -64,6 +65,15 @@ export default {
     },
     actionID: 'project_projectTask_list',
   },
+    TaskAssignedToMeListScreen: {
+    title: 'Project_MyTasks',
+    component: TaskAssignedToMeListScreen,
+    options: {
+      shadedHeader: false,
+    },
+    actionID: 'project_projectTask_list',
+  },
+
   TaskDetailsScreen: {
     title: 'Project_Task',
     component: TaskDetailsScreen,
@@ -89,3 +99,4 @@ export {ProjectDetailsScreen};
 export {TaskListScreen};
 export {TaskDetailsScreen};
 export {TaskFormScreen};
+export {TaskAssignedToMeListScreen};
