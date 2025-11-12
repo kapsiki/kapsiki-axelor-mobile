@@ -44,7 +44,7 @@ interface TaskActionCardProps {
   onPress?: () => void;
 }
 
-const MGMTaskActionCard = ({
+const ModernTaskActionCard = ({
   style,
   task,
   displayParentProjet = false,
@@ -88,4 +88,4 @@ const MGMTaskActionCard = ({
   );
 };
 
-export default MGMTaskActionCard;
+export default ModernTaskActionCard;

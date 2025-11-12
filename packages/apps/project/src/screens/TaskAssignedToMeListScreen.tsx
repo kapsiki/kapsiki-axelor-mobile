@@ -16,12 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, {useMemo, useState} from 'react';
-import {Screen} from '@axelor/aos-mobile-ui';
+import React, {useMemo, useState, useCallback, useEffect} from 'react';
+import {Screen, Text} from '@axelor/aos-mobile-ui';
 import {
   SearchListView,
   useSelector,
   useTranslator,
+  fetchActiveUser,
+  useDispatch,
 } from '@axelor/aos-mobile-core';
 import {ModernTaskActionCard, TaskFilters} from '../components';
 import {searchProjectTask} from '../features/projectTaskSlice';
@@ -29,10 +31,12 @@ import {useTaskFilters} from '../hooks';
 
 const TaskAssignedToMeListScreen = ({navigation}) => {
   const I18n = useTranslator();
+  const dispatch = useDispatch();
 
   useTaskFilters();
 
   const {user} = useSelector(state => state.user);
+  const {userId} = useSelector(state => state.auth);
   const {loading, moreLoading, isListEnd, projectTaskList} = useSelector(
     (state: any) => state.project_projectTask,
   );
@@ -42,6 +46,15 @@ const TaskAssignedToMeListScreen = ({navigation}) => {
   const [selectedPriority, setSelectedPriority] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [isAssignedToMe, setIsAssignedToMe] = useState(false);
+  const [currentUserTasks, setCurrentUserTasks] = useState([]);
+
+  const fetchUser = useCallback(() => {
+    dispatch(fetchActiveUser(userId));
+  }, [dispatch, userId]);
+
+  const filtered = projectTaskList.filter(
+    task => task.assignedTo?.id === userId,
+  );
 
   const sliceFunctionData = useMemo(() => {
     return {
@@ -78,7 +91,7 @@ const TaskAssignedToMeListScreen = ({navigation}) => {
             showProjectSearchBar
           />
         }
-        list={projectTaskList}
+        list={loading !== true && projectTaskList.length > 0 && userId ? filtered : []}
         loading={loading}
         moreLoading={moreLoading}
         isListEnd={isListEnd}
