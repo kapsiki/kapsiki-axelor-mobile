@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     flex: 1,
     flexDirection: 'row',
-    color: Colors.primaryColor.foreground,
+    color: Colors.text,
   },
   parentTask: {
     overflow: 'hidden',
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     //marginHorizontal: 2,
     flex: 3,
     //flexDirection: 'column',
-    color: Colors.primaryColor.foreground,
+    color: Colors.text,
   },
 });
 
